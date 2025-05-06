@@ -20,7 +20,10 @@ export interface DictionaryResult {
    language: string;
 }
 
-const apiKey = "AIzaSyCmC4Lc5HccTxnbzatLgzr-bB2s6VB_J58";
+const apiKey = process.env.GEMINI_API_KEY || "";
+if (!apiKey) {
+   throw new Error("GEMINI_API_KEY is not set in the environment variables");
+}
 const genAI = new GoogleGenerativeAI(apiKey);
 
 const safetySettings = [
