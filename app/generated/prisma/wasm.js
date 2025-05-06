@@ -120,12 +120,17 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
 exports.Prisma.DictionaryEntryScalarFieldEnum = {
   id: 'id',
   word: 'word',
-  definition: 'definition',
   language: 'language',
-  partOfSpeech: 'partOfSpeech',
-  examples: 'examples',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
+};
+
+exports.Prisma.DefinitionScalarFieldEnum = {
+  id: 'id',
+  meaning: 'meaning',
+  partOfSpeech: 'partOfSpeech',
+  examples: 'examples',
+  dictionaryEntryId: 'dictionaryEntryId'
 };
 
 exports.Prisma.TranslationHistoryScalarFieldEnum = {
@@ -147,14 +152,10 @@ exports.Prisma.QueryMode = {
   insensitive: 'insensitive'
 };
 
-exports.Prisma.NullsOrder = {
-  first: 'first',
-  last: 'last'
-};
-
 
 exports.Prisma.ModelName = {
   DictionaryEntry: 'DictionaryEntry',
+  Definition: 'Definition',
   TranslationHistory: 'TranslationHistory'
 };
 

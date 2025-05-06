@@ -42,7 +42,6 @@ const safetySettings = [
    },
 ];
 
-// Helper function to convert language codes to full names for better API understanding
 function getFullLanguageName(code: string): string {
    const languageMap: Record<string, string> = {
       en: "English",

@@ -19,6 +19,11 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
  */
 export type DictionaryEntry = $Result.DefaultSelection<Prisma.$DictionaryEntryPayload>
 /**
+ * Model Definition
+ * 
+ */
+export type Definition = $Result.DefaultSelection<Prisma.$DefinitionPayload>
+/**
  * Model TranslationHistory
  * 
  */
@@ -158,6 +163,16 @@ export class PrismaClient<
     * ```
     */
   get dictionaryEntry(): Prisma.DictionaryEntryDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.definition`: Exposes CRUD operations for the **Definition** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Definitions
+    * const definitions = await prisma.definition.findMany()
+    * ```
+    */
+  get definition(): Prisma.DefinitionDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.translationHistory`: Exposes CRUD operations for the **TranslationHistory** model.
@@ -609,6 +624,7 @@ export namespace Prisma {
 
   export const ModelName: {
     DictionaryEntry: 'DictionaryEntry',
+    Definition: 'Definition',
     TranslationHistory: 'TranslationHistory'
   };
 
@@ -628,7 +644,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "dictionaryEntry" | "translationHistory"
+      modelProps: "dictionaryEntry" | "definition" | "translationHistory"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -703,6 +719,80 @@ export namespace Prisma {
           count: {
             args: Prisma.DictionaryEntryCountArgs<ExtArgs>
             result: $Utils.Optional<DictionaryEntryCountAggregateOutputType> | number
+          }
+        }
+      }
+      Definition: {
+        payload: Prisma.$DefinitionPayload<ExtArgs>
+        fields: Prisma.DefinitionFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.DefinitionFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DefinitionPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.DefinitionFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DefinitionPayload>
+          }
+          findFirst: {
+            args: Prisma.DefinitionFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DefinitionPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.DefinitionFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DefinitionPayload>
+          }
+          findMany: {
+            args: Prisma.DefinitionFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DefinitionPayload>[]
+          }
+          create: {
+            args: Prisma.DefinitionCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DefinitionPayload>
+          }
+          createMany: {
+            args: Prisma.DefinitionCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.DefinitionCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DefinitionPayload>[]
+          }
+          delete: {
+            args: Prisma.DefinitionDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DefinitionPayload>
+          }
+          update: {
+            args: Prisma.DefinitionUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DefinitionPayload>
+          }
+          deleteMany: {
+            args: Prisma.DefinitionDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.DefinitionUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.DefinitionUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DefinitionPayload>[]
+          }
+          upsert: {
+            args: Prisma.DefinitionUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DefinitionPayload>
+          }
+          aggregate: {
+            args: Prisma.DefinitionAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateDefinition>
+          }
+          groupBy: {
+            args: Prisma.DefinitionGroupByArgs<ExtArgs>
+            result: $Utils.Optional<DefinitionGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.DefinitionCountArgs<ExtArgs>
+            result: $Utils.Optional<DefinitionCountAggregateOutputType> | number
           }
         }
       }
@@ -865,6 +955,7 @@ export namespace Prisma {
   }
   export type GlobalOmitConfig = {
     dictionaryEntry?: DictionaryEntryOmit
+    definition?: DefinitionOmit
     translationHistory?: TranslationHistoryOmit
   }
 
@@ -955,6 +1046,36 @@ export namespace Prisma {
    */
 
 
+  /**
+   * Count Type DictionaryEntryCountOutputType
+   */
+
+  export type DictionaryEntryCountOutputType = {
+    definition: number
+  }
+
+  export type DictionaryEntryCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    definition?: boolean | DictionaryEntryCountOutputTypeCountDefinitionArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * DictionaryEntryCountOutputType without action
+   */
+  export type DictionaryEntryCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DictionaryEntryCountOutputType
+     */
+    select?: DictionaryEntryCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * DictionaryEntryCountOutputType without action
+   */
+  export type DictionaryEntryCountOutputTypeCountDefinitionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DefinitionWhereInput
+  }
+
 
   /**
    * Models
@@ -973,10 +1094,7 @@ export namespace Prisma {
   export type DictionaryEntryMinAggregateOutputType = {
     id: string | null
     word: string | null
-    definition: string | null
     language: string | null
-    partOfSpeech: string | null
-    examples: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -984,10 +1102,7 @@ export namespace Prisma {
   export type DictionaryEntryMaxAggregateOutputType = {
     id: string | null
     word: string | null
-    definition: string | null
     language: string | null
-    partOfSpeech: string | null
-    examples: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -995,10 +1110,7 @@ export namespace Prisma {
   export type DictionaryEntryCountAggregateOutputType = {
     id: number
     word: number
-    definition: number
     language: number
-    partOfSpeech: number
-    examples: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -1008,10 +1120,7 @@ export namespace Prisma {
   export type DictionaryEntryMinAggregateInputType = {
     id?: true
     word?: true
-    definition?: true
     language?: true
-    partOfSpeech?: true
-    examples?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -1019,10 +1128,7 @@ export namespace Prisma {
   export type DictionaryEntryMaxAggregateInputType = {
     id?: true
     word?: true
-    definition?: true
     language?: true
-    partOfSpeech?: true
-    examples?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -1030,10 +1136,7 @@ export namespace Prisma {
   export type DictionaryEntryCountAggregateInputType = {
     id?: true
     word?: true
-    definition?: true
     language?: true
-    partOfSpeech?: true
-    examples?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -1114,10 +1217,7 @@ export namespace Prisma {
   export type DictionaryEntryGroupByOutputType = {
     id: string
     word: string
-    definition: string
     language: string
-    partOfSpeech: string | null
-    examples: string | null
     createdAt: Date
     updatedAt: Date
     _count: DictionaryEntryCountAggregateOutputType | null
@@ -1142,21 +1242,17 @@ export namespace Prisma {
   export type DictionaryEntrySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     word?: boolean
-    definition?: boolean
     language?: boolean
-    partOfSpeech?: boolean
-    examples?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    definition?: boolean | DictionaryEntry$definitionArgs<ExtArgs>
+    _count?: boolean | DictionaryEntryCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["dictionaryEntry"]>
 
   export type DictionaryEntrySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     word?: boolean
-    definition?: boolean
     language?: boolean
-    partOfSpeech?: boolean
-    examples?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["dictionaryEntry"]>
@@ -1164,10 +1260,7 @@ export namespace Prisma {
   export type DictionaryEntrySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     word?: boolean
-    definition?: boolean
     language?: boolean
-    partOfSpeech?: boolean
-    examples?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["dictionaryEntry"]>
@@ -1175,26 +1268,28 @@ export namespace Prisma {
   export type DictionaryEntrySelectScalar = {
     id?: boolean
     word?: boolean
-    definition?: boolean
     language?: boolean
-    partOfSpeech?: boolean
-    examples?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type DictionaryEntryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "word" | "definition" | "language" | "partOfSpeech" | "examples" | "createdAt" | "updatedAt", ExtArgs["result"]["dictionaryEntry"]>
+  export type DictionaryEntryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "word" | "language" | "createdAt" | "updatedAt", ExtArgs["result"]["dictionaryEntry"]>
+  export type DictionaryEntryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    definition?: boolean | DictionaryEntry$definitionArgs<ExtArgs>
+    _count?: boolean | DictionaryEntryCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type DictionaryEntryIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type DictionaryEntryIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
 
   export type $DictionaryEntryPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "DictionaryEntry"
-    objects: {}
+    objects: {
+      definition: Prisma.$DefinitionPayload<ExtArgs>[]
+    }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       word: string
-      definition: string
       language: string
-      partOfSpeech: string | null
-      examples: string | null
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["dictionaryEntry"]>
@@ -1591,6 +1686,7 @@ export namespace Prisma {
    */
   export interface Prisma__DictionaryEntryClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    definition<T extends DictionaryEntry$definitionArgs<ExtArgs> = {}>(args?: Subset<T, DictionaryEntry$definitionArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DefinitionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1622,10 +1718,7 @@ export namespace Prisma {
   interface DictionaryEntryFieldRefs {
     readonly id: FieldRef<"DictionaryEntry", 'String'>
     readonly word: FieldRef<"DictionaryEntry", 'String'>
-    readonly definition: FieldRef<"DictionaryEntry", 'String'>
     readonly language: FieldRef<"DictionaryEntry", 'String'>
-    readonly partOfSpeech: FieldRef<"DictionaryEntry", 'String'>
-    readonly examples: FieldRef<"DictionaryEntry", 'String'>
     readonly createdAt: FieldRef<"DictionaryEntry", 'DateTime'>
     readonly updatedAt: FieldRef<"DictionaryEntry", 'DateTime'>
   }
@@ -1645,6 +1738,10 @@ export namespace Prisma {
      */
     omit?: DictionaryEntryOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DictionaryEntryInclude<ExtArgs> | null
+    /**
      * Filter, which DictionaryEntry to fetch.
      */
     where: DictionaryEntryWhereUniqueInput
@@ -1663,6 +1760,10 @@ export namespace Prisma {
      */
     omit?: DictionaryEntryOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DictionaryEntryInclude<ExtArgs> | null
+    /**
      * Filter, which DictionaryEntry to fetch.
      */
     where: DictionaryEntryWhereUniqueInput
@@ -1680,6 +1781,10 @@ export namespace Prisma {
      * Omit specific fields from the DictionaryEntry
      */
     omit?: DictionaryEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DictionaryEntryInclude<ExtArgs> | null
     /**
      * Filter, which DictionaryEntry to fetch.
      */
@@ -1729,6 +1834,10 @@ export namespace Prisma {
      */
     omit?: DictionaryEntryOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DictionaryEntryInclude<ExtArgs> | null
+    /**
      * Filter, which DictionaryEntry to fetch.
      */
     where?: DictionaryEntryWhereInput
@@ -1777,6 +1886,10 @@ export namespace Prisma {
      */
     omit?: DictionaryEntryOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DictionaryEntryInclude<ExtArgs> | null
+    /**
      * Filter, which DictionaryEntries to fetch.
      */
     where?: DictionaryEntryWhereInput
@@ -1819,6 +1932,10 @@ export namespace Prisma {
      * Omit specific fields from the DictionaryEntry
      */
     omit?: DictionaryEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DictionaryEntryInclude<ExtArgs> | null
     /**
      * The data needed to create a DictionaryEntry.
      */
@@ -1867,6 +1984,10 @@ export namespace Prisma {
      * Omit specific fields from the DictionaryEntry
      */
     omit?: DictionaryEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DictionaryEntryInclude<ExtArgs> | null
     /**
      * The data needed to update a DictionaryEntry.
      */
@@ -1934,6 +2055,10 @@ export namespace Prisma {
      */
     omit?: DictionaryEntryOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DictionaryEntryInclude<ExtArgs> | null
+    /**
      * The filter to search for the DictionaryEntry to update in case it exists.
      */
     where: DictionaryEntryWhereUniqueInput
@@ -1960,6 +2085,10 @@ export namespace Prisma {
      */
     omit?: DictionaryEntryOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DictionaryEntryInclude<ExtArgs> | null
+    /**
      * Filter which DictionaryEntry to delete.
      */
     where: DictionaryEntryWhereUniqueInput
@@ -1980,6 +2109,30 @@ export namespace Prisma {
   }
 
   /**
+   * DictionaryEntry.definition
+   */
+  export type DictionaryEntry$definitionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Definition
+     */
+    select?: DefinitionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Definition
+     */
+    omit?: DefinitionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DefinitionInclude<ExtArgs> | null
+    where?: DefinitionWhereInput
+    orderBy?: DefinitionOrderByWithRelationInput | DefinitionOrderByWithRelationInput[]
+    cursor?: DefinitionWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: DefinitionScalarFieldEnum | DefinitionScalarFieldEnum[]
+  }
+
+  /**
    * DictionaryEntry without action
    */
   export type DictionaryEntryDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -1991,6 +2144,1064 @@ export namespace Prisma {
      * Omit specific fields from the DictionaryEntry
      */
     omit?: DictionaryEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DictionaryEntryInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Definition
+   */
+
+  export type AggregateDefinition = {
+    _count: DefinitionCountAggregateOutputType | null
+    _min: DefinitionMinAggregateOutputType | null
+    _max: DefinitionMaxAggregateOutputType | null
+  }
+
+  export type DefinitionMinAggregateOutputType = {
+    id: string | null
+    meaning: string | null
+    partOfSpeech: string | null
+    dictionaryEntryId: string | null
+  }
+
+  export type DefinitionMaxAggregateOutputType = {
+    id: string | null
+    meaning: string | null
+    partOfSpeech: string | null
+    dictionaryEntryId: string | null
+  }
+
+  export type DefinitionCountAggregateOutputType = {
+    id: number
+    meaning: number
+    partOfSpeech: number
+    examples: number
+    dictionaryEntryId: number
+    _all: number
+  }
+
+
+  export type DefinitionMinAggregateInputType = {
+    id?: true
+    meaning?: true
+    partOfSpeech?: true
+    dictionaryEntryId?: true
+  }
+
+  export type DefinitionMaxAggregateInputType = {
+    id?: true
+    meaning?: true
+    partOfSpeech?: true
+    dictionaryEntryId?: true
+  }
+
+  export type DefinitionCountAggregateInputType = {
+    id?: true
+    meaning?: true
+    partOfSpeech?: true
+    examples?: true
+    dictionaryEntryId?: true
+    _all?: true
+  }
+
+  export type DefinitionAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Definition to aggregate.
+     */
+    where?: DefinitionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Definitions to fetch.
+     */
+    orderBy?: DefinitionOrderByWithRelationInput | DefinitionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: DefinitionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Definitions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Definitions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Definitions
+    **/
+    _count?: true | DefinitionCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: DefinitionMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: DefinitionMaxAggregateInputType
+  }
+
+  export type GetDefinitionAggregateType<T extends DefinitionAggregateArgs> = {
+        [P in keyof T & keyof AggregateDefinition]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateDefinition[P]>
+      : GetScalarType<T[P], AggregateDefinition[P]>
+  }
+
+
+
+
+  export type DefinitionGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DefinitionWhereInput
+    orderBy?: DefinitionOrderByWithAggregationInput | DefinitionOrderByWithAggregationInput[]
+    by: DefinitionScalarFieldEnum[] | DefinitionScalarFieldEnum
+    having?: DefinitionScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: DefinitionCountAggregateInputType | true
+    _min?: DefinitionMinAggregateInputType
+    _max?: DefinitionMaxAggregateInputType
+  }
+
+  export type DefinitionGroupByOutputType = {
+    id: string
+    meaning: string
+    partOfSpeech: string
+    examples: string[]
+    dictionaryEntryId: string
+    _count: DefinitionCountAggregateOutputType | null
+    _min: DefinitionMinAggregateOutputType | null
+    _max: DefinitionMaxAggregateOutputType | null
+  }
+
+  type GetDefinitionGroupByPayload<T extends DefinitionGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<DefinitionGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof DefinitionGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], DefinitionGroupByOutputType[P]>
+            : GetScalarType<T[P], DefinitionGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type DefinitionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    meaning?: boolean
+    partOfSpeech?: boolean
+    examples?: boolean
+    dictionaryEntryId?: boolean
+    dictionaryEntry?: boolean | DictionaryEntryDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["definition"]>
+
+  export type DefinitionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    meaning?: boolean
+    partOfSpeech?: boolean
+    examples?: boolean
+    dictionaryEntryId?: boolean
+    dictionaryEntry?: boolean | DictionaryEntryDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["definition"]>
+
+  export type DefinitionSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    meaning?: boolean
+    partOfSpeech?: boolean
+    examples?: boolean
+    dictionaryEntryId?: boolean
+    dictionaryEntry?: boolean | DictionaryEntryDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["definition"]>
+
+  export type DefinitionSelectScalar = {
+    id?: boolean
+    meaning?: boolean
+    partOfSpeech?: boolean
+    examples?: boolean
+    dictionaryEntryId?: boolean
+  }
+
+  export type DefinitionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "meaning" | "partOfSpeech" | "examples" | "dictionaryEntryId", ExtArgs["result"]["definition"]>
+  export type DefinitionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    dictionaryEntry?: boolean | DictionaryEntryDefaultArgs<ExtArgs>
+  }
+  export type DefinitionIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    dictionaryEntry?: boolean | DictionaryEntryDefaultArgs<ExtArgs>
+  }
+  export type DefinitionIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    dictionaryEntry?: boolean | DictionaryEntryDefaultArgs<ExtArgs>
+  }
+
+  export type $DefinitionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Definition"
+    objects: {
+      dictionaryEntry: Prisma.$DictionaryEntryPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      meaning: string
+      partOfSpeech: string
+      examples: string[]
+      dictionaryEntryId: string
+    }, ExtArgs["result"]["definition"]>
+    composites: {}
+  }
+
+  type DefinitionGetPayload<S extends boolean | null | undefined | DefinitionDefaultArgs> = $Result.GetResult<Prisma.$DefinitionPayload, S>
+
+  type DefinitionCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<DefinitionFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: DefinitionCountAggregateInputType | true
+    }
+
+  export interface DefinitionDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Definition'], meta: { name: 'Definition' } }
+    /**
+     * Find zero or one Definition that matches the filter.
+     * @param {DefinitionFindUniqueArgs} args - Arguments to find a Definition
+     * @example
+     * // Get one Definition
+     * const definition = await prisma.definition.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends DefinitionFindUniqueArgs>(args: SelectSubset<T, DefinitionFindUniqueArgs<ExtArgs>>): Prisma__DefinitionClient<$Result.GetResult<Prisma.$DefinitionPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Definition that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {DefinitionFindUniqueOrThrowArgs} args - Arguments to find a Definition
+     * @example
+     * // Get one Definition
+     * const definition = await prisma.definition.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends DefinitionFindUniqueOrThrowArgs>(args: SelectSubset<T, DefinitionFindUniqueOrThrowArgs<ExtArgs>>): Prisma__DefinitionClient<$Result.GetResult<Prisma.$DefinitionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Definition that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DefinitionFindFirstArgs} args - Arguments to find a Definition
+     * @example
+     * // Get one Definition
+     * const definition = await prisma.definition.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends DefinitionFindFirstArgs>(args?: SelectSubset<T, DefinitionFindFirstArgs<ExtArgs>>): Prisma__DefinitionClient<$Result.GetResult<Prisma.$DefinitionPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Definition that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DefinitionFindFirstOrThrowArgs} args - Arguments to find a Definition
+     * @example
+     * // Get one Definition
+     * const definition = await prisma.definition.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends DefinitionFindFirstOrThrowArgs>(args?: SelectSubset<T, DefinitionFindFirstOrThrowArgs<ExtArgs>>): Prisma__DefinitionClient<$Result.GetResult<Prisma.$DefinitionPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Definitions that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DefinitionFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Definitions
+     * const definitions = await prisma.definition.findMany()
+     * 
+     * // Get first 10 Definitions
+     * const definitions = await prisma.definition.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const definitionWithIdOnly = await prisma.definition.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends DefinitionFindManyArgs>(args?: SelectSubset<T, DefinitionFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DefinitionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Definition.
+     * @param {DefinitionCreateArgs} args - Arguments to create a Definition.
+     * @example
+     * // Create one Definition
+     * const Definition = await prisma.definition.create({
+     *   data: {
+     *     // ... data to create a Definition
+     *   }
+     * })
+     * 
+     */
+    create<T extends DefinitionCreateArgs>(args: SelectSubset<T, DefinitionCreateArgs<ExtArgs>>): Prisma__DefinitionClient<$Result.GetResult<Prisma.$DefinitionPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Definitions.
+     * @param {DefinitionCreateManyArgs} args - Arguments to create many Definitions.
+     * @example
+     * // Create many Definitions
+     * const definition = await prisma.definition.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends DefinitionCreateManyArgs>(args?: SelectSubset<T, DefinitionCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Definitions and returns the data saved in the database.
+     * @param {DefinitionCreateManyAndReturnArgs} args - Arguments to create many Definitions.
+     * @example
+     * // Create many Definitions
+     * const definition = await prisma.definition.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Definitions and only return the `id`
+     * const definitionWithIdOnly = await prisma.definition.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends DefinitionCreateManyAndReturnArgs>(args?: SelectSubset<T, DefinitionCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DefinitionPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Definition.
+     * @param {DefinitionDeleteArgs} args - Arguments to delete one Definition.
+     * @example
+     * // Delete one Definition
+     * const Definition = await prisma.definition.delete({
+     *   where: {
+     *     // ... filter to delete one Definition
+     *   }
+     * })
+     * 
+     */
+    delete<T extends DefinitionDeleteArgs>(args: SelectSubset<T, DefinitionDeleteArgs<ExtArgs>>): Prisma__DefinitionClient<$Result.GetResult<Prisma.$DefinitionPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Definition.
+     * @param {DefinitionUpdateArgs} args - Arguments to update one Definition.
+     * @example
+     * // Update one Definition
+     * const definition = await prisma.definition.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends DefinitionUpdateArgs>(args: SelectSubset<T, DefinitionUpdateArgs<ExtArgs>>): Prisma__DefinitionClient<$Result.GetResult<Prisma.$DefinitionPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Definitions.
+     * @param {DefinitionDeleteManyArgs} args - Arguments to filter Definitions to delete.
+     * @example
+     * // Delete a few Definitions
+     * const { count } = await prisma.definition.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends DefinitionDeleteManyArgs>(args?: SelectSubset<T, DefinitionDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Definitions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DefinitionUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Definitions
+     * const definition = await prisma.definition.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends DefinitionUpdateManyArgs>(args: SelectSubset<T, DefinitionUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Definitions and returns the data updated in the database.
+     * @param {DefinitionUpdateManyAndReturnArgs} args - Arguments to update many Definitions.
+     * @example
+     * // Update many Definitions
+     * const definition = await prisma.definition.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Definitions and only return the `id`
+     * const definitionWithIdOnly = await prisma.definition.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends DefinitionUpdateManyAndReturnArgs>(args: SelectSubset<T, DefinitionUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DefinitionPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Definition.
+     * @param {DefinitionUpsertArgs} args - Arguments to update or create a Definition.
+     * @example
+     * // Update or create a Definition
+     * const definition = await prisma.definition.upsert({
+     *   create: {
+     *     // ... data to create a Definition
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Definition we want to update
+     *   }
+     * })
+     */
+    upsert<T extends DefinitionUpsertArgs>(args: SelectSubset<T, DefinitionUpsertArgs<ExtArgs>>): Prisma__DefinitionClient<$Result.GetResult<Prisma.$DefinitionPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Definitions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DefinitionCountArgs} args - Arguments to filter Definitions to count.
+     * @example
+     * // Count the number of Definitions
+     * const count = await prisma.definition.count({
+     *   where: {
+     *     // ... the filter for the Definitions we want to count
+     *   }
+     * })
+    **/
+    count<T extends DefinitionCountArgs>(
+      args?: Subset<T, DefinitionCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], DefinitionCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Definition.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DefinitionAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends DefinitionAggregateArgs>(args: Subset<T, DefinitionAggregateArgs>): Prisma.PrismaPromise<GetDefinitionAggregateType<T>>
+
+    /**
+     * Group by Definition.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DefinitionGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends DefinitionGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: DefinitionGroupByArgs['orderBy'] }
+        : { orderBy?: DefinitionGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, DefinitionGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetDefinitionGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Definition model
+   */
+  readonly fields: DefinitionFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Definition.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__DefinitionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    dictionaryEntry<T extends DictionaryEntryDefaultArgs<ExtArgs> = {}>(args?: Subset<T, DictionaryEntryDefaultArgs<ExtArgs>>): Prisma__DictionaryEntryClient<$Result.GetResult<Prisma.$DictionaryEntryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Definition model
+   */
+  interface DefinitionFieldRefs {
+    readonly id: FieldRef<"Definition", 'String'>
+    readonly meaning: FieldRef<"Definition", 'String'>
+    readonly partOfSpeech: FieldRef<"Definition", 'String'>
+    readonly examples: FieldRef<"Definition", 'String[]'>
+    readonly dictionaryEntryId: FieldRef<"Definition", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Definition findUnique
+   */
+  export type DefinitionFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Definition
+     */
+    select?: DefinitionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Definition
+     */
+    omit?: DefinitionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DefinitionInclude<ExtArgs> | null
+    /**
+     * Filter, which Definition to fetch.
+     */
+    where: DefinitionWhereUniqueInput
+  }
+
+  /**
+   * Definition findUniqueOrThrow
+   */
+  export type DefinitionFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Definition
+     */
+    select?: DefinitionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Definition
+     */
+    omit?: DefinitionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DefinitionInclude<ExtArgs> | null
+    /**
+     * Filter, which Definition to fetch.
+     */
+    where: DefinitionWhereUniqueInput
+  }
+
+  /**
+   * Definition findFirst
+   */
+  export type DefinitionFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Definition
+     */
+    select?: DefinitionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Definition
+     */
+    omit?: DefinitionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DefinitionInclude<ExtArgs> | null
+    /**
+     * Filter, which Definition to fetch.
+     */
+    where?: DefinitionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Definitions to fetch.
+     */
+    orderBy?: DefinitionOrderByWithRelationInput | DefinitionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Definitions.
+     */
+    cursor?: DefinitionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Definitions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Definitions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Definitions.
+     */
+    distinct?: DefinitionScalarFieldEnum | DefinitionScalarFieldEnum[]
+  }
+
+  /**
+   * Definition findFirstOrThrow
+   */
+  export type DefinitionFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Definition
+     */
+    select?: DefinitionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Definition
+     */
+    omit?: DefinitionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DefinitionInclude<ExtArgs> | null
+    /**
+     * Filter, which Definition to fetch.
+     */
+    where?: DefinitionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Definitions to fetch.
+     */
+    orderBy?: DefinitionOrderByWithRelationInput | DefinitionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Definitions.
+     */
+    cursor?: DefinitionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Definitions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Definitions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Definitions.
+     */
+    distinct?: DefinitionScalarFieldEnum | DefinitionScalarFieldEnum[]
+  }
+
+  /**
+   * Definition findMany
+   */
+  export type DefinitionFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Definition
+     */
+    select?: DefinitionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Definition
+     */
+    omit?: DefinitionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DefinitionInclude<ExtArgs> | null
+    /**
+     * Filter, which Definitions to fetch.
+     */
+    where?: DefinitionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Definitions to fetch.
+     */
+    orderBy?: DefinitionOrderByWithRelationInput | DefinitionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Definitions.
+     */
+    cursor?: DefinitionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Definitions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Definitions.
+     */
+    skip?: number
+    distinct?: DefinitionScalarFieldEnum | DefinitionScalarFieldEnum[]
+  }
+
+  /**
+   * Definition create
+   */
+  export type DefinitionCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Definition
+     */
+    select?: DefinitionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Definition
+     */
+    omit?: DefinitionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DefinitionInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Definition.
+     */
+    data: XOR<DefinitionCreateInput, DefinitionUncheckedCreateInput>
+  }
+
+  /**
+   * Definition createMany
+   */
+  export type DefinitionCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Definitions.
+     */
+    data: DefinitionCreateManyInput | DefinitionCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Definition createManyAndReturn
+   */
+  export type DefinitionCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Definition
+     */
+    select?: DefinitionSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Definition
+     */
+    omit?: DefinitionOmit<ExtArgs> | null
+    /**
+     * The data used to create many Definitions.
+     */
+    data: DefinitionCreateManyInput | DefinitionCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DefinitionIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Definition update
+   */
+  export type DefinitionUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Definition
+     */
+    select?: DefinitionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Definition
+     */
+    omit?: DefinitionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DefinitionInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Definition.
+     */
+    data: XOR<DefinitionUpdateInput, DefinitionUncheckedUpdateInput>
+    /**
+     * Choose, which Definition to update.
+     */
+    where: DefinitionWhereUniqueInput
+  }
+
+  /**
+   * Definition updateMany
+   */
+  export type DefinitionUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Definitions.
+     */
+    data: XOR<DefinitionUpdateManyMutationInput, DefinitionUncheckedUpdateManyInput>
+    /**
+     * Filter which Definitions to update
+     */
+    where?: DefinitionWhereInput
+    /**
+     * Limit how many Definitions to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Definition updateManyAndReturn
+   */
+  export type DefinitionUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Definition
+     */
+    select?: DefinitionSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Definition
+     */
+    omit?: DefinitionOmit<ExtArgs> | null
+    /**
+     * The data used to update Definitions.
+     */
+    data: XOR<DefinitionUpdateManyMutationInput, DefinitionUncheckedUpdateManyInput>
+    /**
+     * Filter which Definitions to update
+     */
+    where?: DefinitionWhereInput
+    /**
+     * Limit how many Definitions to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DefinitionIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Definition upsert
+   */
+  export type DefinitionUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Definition
+     */
+    select?: DefinitionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Definition
+     */
+    omit?: DefinitionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DefinitionInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Definition to update in case it exists.
+     */
+    where: DefinitionWhereUniqueInput
+    /**
+     * In case the Definition found by the `where` argument doesn't exist, create a new Definition with this data.
+     */
+    create: XOR<DefinitionCreateInput, DefinitionUncheckedCreateInput>
+    /**
+     * In case the Definition was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<DefinitionUpdateInput, DefinitionUncheckedUpdateInput>
+  }
+
+  /**
+   * Definition delete
+   */
+  export type DefinitionDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Definition
+     */
+    select?: DefinitionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Definition
+     */
+    omit?: DefinitionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DefinitionInclude<ExtArgs> | null
+    /**
+     * Filter which Definition to delete.
+     */
+    where: DefinitionWhereUniqueInput
+  }
+
+  /**
+   * Definition deleteMany
+   */
+  export type DefinitionDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Definitions to delete
+     */
+    where?: DefinitionWhereInput
+    /**
+     * Limit how many Definitions to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Definition without action
+   */
+  export type DefinitionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Definition
+     */
+    select?: DefinitionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Definition
+     */
+    omit?: DefinitionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DefinitionInclude<ExtArgs> | null
   }
 
 
@@ -3019,15 +4230,23 @@ export namespace Prisma {
   export const DictionaryEntryScalarFieldEnum: {
     id: 'id',
     word: 'word',
-    definition: 'definition',
     language: 'language',
-    partOfSpeech: 'partOfSpeech',
-    examples: 'examples',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
 
   export type DictionaryEntryScalarFieldEnum = (typeof DictionaryEntryScalarFieldEnum)[keyof typeof DictionaryEntryScalarFieldEnum]
+
+
+  export const DefinitionScalarFieldEnum: {
+    id: 'id',
+    meaning: 'meaning',
+    partOfSpeech: 'partOfSpeech',
+    examples: 'examples',
+    dictionaryEntryId: 'dictionaryEntryId'
+  };
+
+  export type DefinitionScalarFieldEnum = (typeof DefinitionScalarFieldEnum)[keyof typeof DefinitionScalarFieldEnum]
 
 
   export const TranslationHistoryScalarFieldEnum: {
@@ -3056,14 +4275,6 @@ export namespace Prisma {
   };
 
   export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
-
-
-  export const NullsOrder: {
-    first: 'first',
-    last: 'last'
-  };
-
-  export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 
 
   /**
@@ -3122,23 +4333,19 @@ export namespace Prisma {
     NOT?: DictionaryEntryWhereInput | DictionaryEntryWhereInput[]
     id?: StringFilter<"DictionaryEntry"> | string
     word?: StringFilter<"DictionaryEntry"> | string
-    definition?: StringFilter<"DictionaryEntry"> | string
     language?: StringFilter<"DictionaryEntry"> | string
-    partOfSpeech?: StringNullableFilter<"DictionaryEntry"> | string | null
-    examples?: StringNullableFilter<"DictionaryEntry"> | string | null
     createdAt?: DateTimeFilter<"DictionaryEntry"> | Date | string
     updatedAt?: DateTimeFilter<"DictionaryEntry"> | Date | string
+    definition?: DefinitionListRelationFilter
   }
 
   export type DictionaryEntryOrderByWithRelationInput = {
     id?: SortOrder
     word?: SortOrder
-    definition?: SortOrder
     language?: SortOrder
-    partOfSpeech?: SortOrderInput | SortOrder
-    examples?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    definition?: DefinitionOrderByRelationAggregateInput
   }
 
   export type DictionaryEntryWhereUniqueInput = Prisma.AtLeast<{
@@ -3148,21 +4355,16 @@ export namespace Prisma {
     OR?: DictionaryEntryWhereInput[]
     NOT?: DictionaryEntryWhereInput | DictionaryEntryWhereInput[]
     word?: StringFilter<"DictionaryEntry"> | string
-    definition?: StringFilter<"DictionaryEntry"> | string
     language?: StringFilter<"DictionaryEntry"> | string
-    partOfSpeech?: StringNullableFilter<"DictionaryEntry"> | string | null
-    examples?: StringNullableFilter<"DictionaryEntry"> | string | null
     createdAt?: DateTimeFilter<"DictionaryEntry"> | Date | string
     updatedAt?: DateTimeFilter<"DictionaryEntry"> | Date | string
+    definition?: DefinitionListRelationFilter
   }, "id" | "word_language">
 
   export type DictionaryEntryOrderByWithAggregationInput = {
     id?: SortOrder
     word?: SortOrder
-    definition?: SortOrder
     language?: SortOrder
-    partOfSpeech?: SortOrderInput | SortOrder
-    examples?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: DictionaryEntryCountOrderByAggregateInput
@@ -3176,12 +4378,64 @@ export namespace Prisma {
     NOT?: DictionaryEntryScalarWhereWithAggregatesInput | DictionaryEntryScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"DictionaryEntry"> | string
     word?: StringWithAggregatesFilter<"DictionaryEntry"> | string
-    definition?: StringWithAggregatesFilter<"DictionaryEntry"> | string
     language?: StringWithAggregatesFilter<"DictionaryEntry"> | string
-    partOfSpeech?: StringNullableWithAggregatesFilter<"DictionaryEntry"> | string | null
-    examples?: StringNullableWithAggregatesFilter<"DictionaryEntry"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"DictionaryEntry"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"DictionaryEntry"> | Date | string
+  }
+
+  export type DefinitionWhereInput = {
+    AND?: DefinitionWhereInput | DefinitionWhereInput[]
+    OR?: DefinitionWhereInput[]
+    NOT?: DefinitionWhereInput | DefinitionWhereInput[]
+    id?: StringFilter<"Definition"> | string
+    meaning?: StringFilter<"Definition"> | string
+    partOfSpeech?: StringFilter<"Definition"> | string
+    examples?: StringNullableListFilter<"Definition">
+    dictionaryEntryId?: StringFilter<"Definition"> | string
+    dictionaryEntry?: XOR<DictionaryEntryScalarRelationFilter, DictionaryEntryWhereInput>
+  }
+
+  export type DefinitionOrderByWithRelationInput = {
+    id?: SortOrder
+    meaning?: SortOrder
+    partOfSpeech?: SortOrder
+    examples?: SortOrder
+    dictionaryEntryId?: SortOrder
+    dictionaryEntry?: DictionaryEntryOrderByWithRelationInput
+  }
+
+  export type DefinitionWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: DefinitionWhereInput | DefinitionWhereInput[]
+    OR?: DefinitionWhereInput[]
+    NOT?: DefinitionWhereInput | DefinitionWhereInput[]
+    meaning?: StringFilter<"Definition"> | string
+    partOfSpeech?: StringFilter<"Definition"> | string
+    examples?: StringNullableListFilter<"Definition">
+    dictionaryEntryId?: StringFilter<"Definition"> | string
+    dictionaryEntry?: XOR<DictionaryEntryScalarRelationFilter, DictionaryEntryWhereInput>
+  }, "id">
+
+  export type DefinitionOrderByWithAggregationInput = {
+    id?: SortOrder
+    meaning?: SortOrder
+    partOfSpeech?: SortOrder
+    examples?: SortOrder
+    dictionaryEntryId?: SortOrder
+    _count?: DefinitionCountOrderByAggregateInput
+    _max?: DefinitionMaxOrderByAggregateInput
+    _min?: DefinitionMinOrderByAggregateInput
+  }
+
+  export type DefinitionScalarWhereWithAggregatesInput = {
+    AND?: DefinitionScalarWhereWithAggregatesInput | DefinitionScalarWhereWithAggregatesInput[]
+    OR?: DefinitionScalarWhereWithAggregatesInput[]
+    NOT?: DefinitionScalarWhereWithAggregatesInput | DefinitionScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Definition"> | string
+    meaning?: StringWithAggregatesFilter<"Definition"> | string
+    partOfSpeech?: StringWithAggregatesFilter<"Definition"> | string
+    examples?: StringNullableListFilter<"Definition">
+    dictionaryEntryId?: StringWithAggregatesFilter<"Definition"> | string
   }
 
   export type TranslationHistoryWhereInput = {
@@ -3244,54 +4498,43 @@ export namespace Prisma {
   export type DictionaryEntryCreateInput = {
     id?: string
     word: string
-    definition: string
     language: string
-    partOfSpeech?: string | null
-    examples?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    definition?: DefinitionCreateNestedManyWithoutDictionaryEntryInput
   }
 
   export type DictionaryEntryUncheckedCreateInput = {
     id?: string
     word: string
-    definition: string
     language: string
-    partOfSpeech?: string | null
-    examples?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    definition?: DefinitionUncheckedCreateNestedManyWithoutDictionaryEntryInput
   }
 
   export type DictionaryEntryUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     word?: StringFieldUpdateOperationsInput | string
-    definition?: StringFieldUpdateOperationsInput | string
     language?: StringFieldUpdateOperationsInput | string
-    partOfSpeech?: NullableStringFieldUpdateOperationsInput | string | null
-    examples?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    definition?: DefinitionUpdateManyWithoutDictionaryEntryNestedInput
   }
 
   export type DictionaryEntryUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     word?: StringFieldUpdateOperationsInput | string
-    definition?: StringFieldUpdateOperationsInput | string
     language?: StringFieldUpdateOperationsInput | string
-    partOfSpeech?: NullableStringFieldUpdateOperationsInput | string | null
-    examples?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    definition?: DefinitionUncheckedUpdateManyWithoutDictionaryEntryNestedInput
   }
 
   export type DictionaryEntryCreateManyInput = {
     id?: string
     word: string
-    definition: string
     language: string
-    partOfSpeech?: string | null
-    examples?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -3299,10 +4542,7 @@ export namespace Prisma {
   export type DictionaryEntryUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     word?: StringFieldUpdateOperationsInput | string
-    definition?: StringFieldUpdateOperationsInput | string
     language?: StringFieldUpdateOperationsInput | string
-    partOfSpeech?: NullableStringFieldUpdateOperationsInput | string | null
-    examples?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -3310,12 +4550,64 @@ export namespace Prisma {
   export type DictionaryEntryUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     word?: StringFieldUpdateOperationsInput | string
-    definition?: StringFieldUpdateOperationsInput | string
     language?: StringFieldUpdateOperationsInput | string
-    partOfSpeech?: NullableStringFieldUpdateOperationsInput | string | null
-    examples?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DefinitionCreateInput = {
+    id?: string
+    meaning: string
+    partOfSpeech: string
+    examples?: DefinitionCreateexamplesInput | string[]
+    dictionaryEntry: DictionaryEntryCreateNestedOneWithoutDefinitionInput
+  }
+
+  export type DefinitionUncheckedCreateInput = {
+    id?: string
+    meaning: string
+    partOfSpeech: string
+    examples?: DefinitionCreateexamplesInput | string[]
+    dictionaryEntryId: string
+  }
+
+  export type DefinitionUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    meaning?: StringFieldUpdateOperationsInput | string
+    partOfSpeech?: StringFieldUpdateOperationsInput | string
+    examples?: DefinitionUpdateexamplesInput | string[]
+    dictionaryEntry?: DictionaryEntryUpdateOneRequiredWithoutDefinitionNestedInput
+  }
+
+  export type DefinitionUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    meaning?: StringFieldUpdateOperationsInput | string
+    partOfSpeech?: StringFieldUpdateOperationsInput | string
+    examples?: DefinitionUpdateexamplesInput | string[]
+    dictionaryEntryId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type DefinitionCreateManyInput = {
+    id?: string
+    meaning: string
+    partOfSpeech: string
+    examples?: DefinitionCreateexamplesInput | string[]
+    dictionaryEntryId: string
+  }
+
+  export type DefinitionUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    meaning?: StringFieldUpdateOperationsInput | string
+    partOfSpeech?: StringFieldUpdateOperationsInput | string
+    examples?: DefinitionUpdateexamplesInput | string[]
+  }
+
+  export type DefinitionUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    meaning?: StringFieldUpdateOperationsInput | string
+    partOfSpeech?: StringFieldUpdateOperationsInput | string
+    examples?: DefinitionUpdateexamplesInput | string[]
+    dictionaryEntryId?: StringFieldUpdateOperationsInput | string
   }
 
   export type TranslationHistoryCreateInput = {
@@ -3396,21 +4688,6 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
-  export type StringNullableFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedStringNullableFilter<$PrismaModel> | string | null
-  }
-
   export type DateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -3422,9 +4699,14 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
-  export type SortOrderInput = {
-    sort: SortOrder
-    nulls?: NullsOrder
+  export type DefinitionListRelationFilter = {
+    every?: DefinitionWhereInput
+    some?: DefinitionWhereInput
+    none?: DefinitionWhereInput
+  }
+
+  export type DefinitionOrderByRelationAggregateInput = {
+    _count?: SortOrder
   }
 
   export type DictionaryEntryWordLanguageCompoundUniqueInput = {
@@ -3435,10 +4717,7 @@ export namespace Prisma {
   export type DictionaryEntryCountOrderByAggregateInput = {
     id?: SortOrder
     word?: SortOrder
-    definition?: SortOrder
     language?: SortOrder
-    partOfSpeech?: SortOrder
-    examples?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -3446,10 +4725,7 @@ export namespace Prisma {
   export type DictionaryEntryMaxOrderByAggregateInput = {
     id?: SortOrder
     word?: SortOrder
-    definition?: SortOrder
     language?: SortOrder
-    partOfSpeech?: SortOrder
-    examples?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -3457,10 +4733,7 @@ export namespace Prisma {
   export type DictionaryEntryMinOrderByAggregateInput = {
     id?: SortOrder
     word?: SortOrder
-    definition?: SortOrder
     language?: SortOrder
-    partOfSpeech?: SortOrder
-    examples?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -3483,24 +4756,6 @@ export namespace Prisma {
     _max?: NestedStringFilter<$PrismaModel>
   }
 
-  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedStringNullableFilter<$PrismaModel>
-    _max?: NestedStringNullableFilter<$PrismaModel>
-  }
-
   export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -3513,6 +4768,41 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type StringNullableListFilter<$PrismaModel = never> = {
+    equals?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    has?: string | StringFieldRefInput<$PrismaModel> | null
+    hasEvery?: string[] | ListStringFieldRefInput<$PrismaModel>
+    hasSome?: string[] | ListStringFieldRefInput<$PrismaModel>
+    isEmpty?: boolean
+  }
+
+  export type DictionaryEntryScalarRelationFilter = {
+    is?: DictionaryEntryWhereInput
+    isNot?: DictionaryEntryWhereInput
+  }
+
+  export type DefinitionCountOrderByAggregateInput = {
+    id?: SortOrder
+    meaning?: SortOrder
+    partOfSpeech?: SortOrder
+    examples?: SortOrder
+    dictionaryEntryId?: SortOrder
+  }
+
+  export type DefinitionMaxOrderByAggregateInput = {
+    id?: SortOrder
+    meaning?: SortOrder
+    partOfSpeech?: SortOrder
+    dictionaryEntryId?: SortOrder
+  }
+
+  export type DefinitionMinOrderByAggregateInput = {
+    id?: SortOrder
+    meaning?: SortOrder
+    partOfSpeech?: SortOrder
+    dictionaryEntryId?: SortOrder
   }
 
   export type TranslationHistoryCountOrderByAggregateInput = {
@@ -3542,16 +4832,77 @@ export namespace Prisma {
     createdAt?: SortOrder
   }
 
+  export type DefinitionCreateNestedManyWithoutDictionaryEntryInput = {
+    create?: XOR<DefinitionCreateWithoutDictionaryEntryInput, DefinitionUncheckedCreateWithoutDictionaryEntryInput> | DefinitionCreateWithoutDictionaryEntryInput[] | DefinitionUncheckedCreateWithoutDictionaryEntryInput[]
+    connectOrCreate?: DefinitionCreateOrConnectWithoutDictionaryEntryInput | DefinitionCreateOrConnectWithoutDictionaryEntryInput[]
+    createMany?: DefinitionCreateManyDictionaryEntryInputEnvelope
+    connect?: DefinitionWhereUniqueInput | DefinitionWhereUniqueInput[]
+  }
+
+  export type DefinitionUncheckedCreateNestedManyWithoutDictionaryEntryInput = {
+    create?: XOR<DefinitionCreateWithoutDictionaryEntryInput, DefinitionUncheckedCreateWithoutDictionaryEntryInput> | DefinitionCreateWithoutDictionaryEntryInput[] | DefinitionUncheckedCreateWithoutDictionaryEntryInput[]
+    connectOrCreate?: DefinitionCreateOrConnectWithoutDictionaryEntryInput | DefinitionCreateOrConnectWithoutDictionaryEntryInput[]
+    createMany?: DefinitionCreateManyDictionaryEntryInputEnvelope
+    connect?: DefinitionWhereUniqueInput | DefinitionWhereUniqueInput[]
+  }
+
   export type StringFieldUpdateOperationsInput = {
     set?: string
   }
 
-  export type NullableStringFieldUpdateOperationsInput = {
-    set?: string | null
-  }
-
   export type DateTimeFieldUpdateOperationsInput = {
     set?: Date | string
+  }
+
+  export type DefinitionUpdateManyWithoutDictionaryEntryNestedInput = {
+    create?: XOR<DefinitionCreateWithoutDictionaryEntryInput, DefinitionUncheckedCreateWithoutDictionaryEntryInput> | DefinitionCreateWithoutDictionaryEntryInput[] | DefinitionUncheckedCreateWithoutDictionaryEntryInput[]
+    connectOrCreate?: DefinitionCreateOrConnectWithoutDictionaryEntryInput | DefinitionCreateOrConnectWithoutDictionaryEntryInput[]
+    upsert?: DefinitionUpsertWithWhereUniqueWithoutDictionaryEntryInput | DefinitionUpsertWithWhereUniqueWithoutDictionaryEntryInput[]
+    createMany?: DefinitionCreateManyDictionaryEntryInputEnvelope
+    set?: DefinitionWhereUniqueInput | DefinitionWhereUniqueInput[]
+    disconnect?: DefinitionWhereUniqueInput | DefinitionWhereUniqueInput[]
+    delete?: DefinitionWhereUniqueInput | DefinitionWhereUniqueInput[]
+    connect?: DefinitionWhereUniqueInput | DefinitionWhereUniqueInput[]
+    update?: DefinitionUpdateWithWhereUniqueWithoutDictionaryEntryInput | DefinitionUpdateWithWhereUniqueWithoutDictionaryEntryInput[]
+    updateMany?: DefinitionUpdateManyWithWhereWithoutDictionaryEntryInput | DefinitionUpdateManyWithWhereWithoutDictionaryEntryInput[]
+    deleteMany?: DefinitionScalarWhereInput | DefinitionScalarWhereInput[]
+  }
+
+  export type DefinitionUncheckedUpdateManyWithoutDictionaryEntryNestedInput = {
+    create?: XOR<DefinitionCreateWithoutDictionaryEntryInput, DefinitionUncheckedCreateWithoutDictionaryEntryInput> | DefinitionCreateWithoutDictionaryEntryInput[] | DefinitionUncheckedCreateWithoutDictionaryEntryInput[]
+    connectOrCreate?: DefinitionCreateOrConnectWithoutDictionaryEntryInput | DefinitionCreateOrConnectWithoutDictionaryEntryInput[]
+    upsert?: DefinitionUpsertWithWhereUniqueWithoutDictionaryEntryInput | DefinitionUpsertWithWhereUniqueWithoutDictionaryEntryInput[]
+    createMany?: DefinitionCreateManyDictionaryEntryInputEnvelope
+    set?: DefinitionWhereUniqueInput | DefinitionWhereUniqueInput[]
+    disconnect?: DefinitionWhereUniqueInput | DefinitionWhereUniqueInput[]
+    delete?: DefinitionWhereUniqueInput | DefinitionWhereUniqueInput[]
+    connect?: DefinitionWhereUniqueInput | DefinitionWhereUniqueInput[]
+    update?: DefinitionUpdateWithWhereUniqueWithoutDictionaryEntryInput | DefinitionUpdateWithWhereUniqueWithoutDictionaryEntryInput[]
+    updateMany?: DefinitionUpdateManyWithWhereWithoutDictionaryEntryInput | DefinitionUpdateManyWithWhereWithoutDictionaryEntryInput[]
+    deleteMany?: DefinitionScalarWhereInput | DefinitionScalarWhereInput[]
+  }
+
+  export type DefinitionCreateexamplesInput = {
+    set: string[]
+  }
+
+  export type DictionaryEntryCreateNestedOneWithoutDefinitionInput = {
+    create?: XOR<DictionaryEntryCreateWithoutDefinitionInput, DictionaryEntryUncheckedCreateWithoutDefinitionInput>
+    connectOrCreate?: DictionaryEntryCreateOrConnectWithoutDefinitionInput
+    connect?: DictionaryEntryWhereUniqueInput
+  }
+
+  export type DefinitionUpdateexamplesInput = {
+    set?: string[]
+    push?: string | string[]
+  }
+
+  export type DictionaryEntryUpdateOneRequiredWithoutDefinitionNestedInput = {
+    create?: XOR<DictionaryEntryCreateWithoutDefinitionInput, DictionaryEntryUncheckedCreateWithoutDefinitionInput>
+    connectOrCreate?: DictionaryEntryCreateOrConnectWithoutDefinitionInput
+    upsert?: DictionaryEntryUpsertWithoutDefinitionInput
+    connect?: DictionaryEntryWhereUniqueInput
+    update?: XOR<XOR<DictionaryEntryUpdateToOneWithWhereWithoutDefinitionInput, DictionaryEntryUpdateWithoutDefinitionInput>, DictionaryEntryUncheckedUpdateWithoutDefinitionInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -3566,20 +4917,6 @@ export namespace Prisma {
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     not?: NestedStringFilter<$PrismaModel> | string
-  }
-
-  export type NestedStringNullableFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
   export type NestedDateTimeFilter<$PrismaModel = never> = {
@@ -3621,34 +4958,6 @@ export namespace Prisma {
     not?: NestedIntFilter<$PrismaModel> | number
   }
 
-  export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedStringNullableFilter<$PrismaModel>
-    _max?: NestedStringNullableFilter<$PrismaModel>
-  }
-
-  export type NestedIntNullableFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableFilter<$PrismaModel> | number | null
-  }
-
   export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -3661,6 +4970,133 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type DefinitionCreateWithoutDictionaryEntryInput = {
+    id?: string
+    meaning: string
+    partOfSpeech: string
+    examples?: DefinitionCreateexamplesInput | string[]
+  }
+
+  export type DefinitionUncheckedCreateWithoutDictionaryEntryInput = {
+    id?: string
+    meaning: string
+    partOfSpeech: string
+    examples?: DefinitionCreateexamplesInput | string[]
+  }
+
+  export type DefinitionCreateOrConnectWithoutDictionaryEntryInput = {
+    where: DefinitionWhereUniqueInput
+    create: XOR<DefinitionCreateWithoutDictionaryEntryInput, DefinitionUncheckedCreateWithoutDictionaryEntryInput>
+  }
+
+  export type DefinitionCreateManyDictionaryEntryInputEnvelope = {
+    data: DefinitionCreateManyDictionaryEntryInput | DefinitionCreateManyDictionaryEntryInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type DefinitionUpsertWithWhereUniqueWithoutDictionaryEntryInput = {
+    where: DefinitionWhereUniqueInput
+    update: XOR<DefinitionUpdateWithoutDictionaryEntryInput, DefinitionUncheckedUpdateWithoutDictionaryEntryInput>
+    create: XOR<DefinitionCreateWithoutDictionaryEntryInput, DefinitionUncheckedCreateWithoutDictionaryEntryInput>
+  }
+
+  export type DefinitionUpdateWithWhereUniqueWithoutDictionaryEntryInput = {
+    where: DefinitionWhereUniqueInput
+    data: XOR<DefinitionUpdateWithoutDictionaryEntryInput, DefinitionUncheckedUpdateWithoutDictionaryEntryInput>
+  }
+
+  export type DefinitionUpdateManyWithWhereWithoutDictionaryEntryInput = {
+    where: DefinitionScalarWhereInput
+    data: XOR<DefinitionUpdateManyMutationInput, DefinitionUncheckedUpdateManyWithoutDictionaryEntryInput>
+  }
+
+  export type DefinitionScalarWhereInput = {
+    AND?: DefinitionScalarWhereInput | DefinitionScalarWhereInput[]
+    OR?: DefinitionScalarWhereInput[]
+    NOT?: DefinitionScalarWhereInput | DefinitionScalarWhereInput[]
+    id?: StringFilter<"Definition"> | string
+    meaning?: StringFilter<"Definition"> | string
+    partOfSpeech?: StringFilter<"Definition"> | string
+    examples?: StringNullableListFilter<"Definition">
+    dictionaryEntryId?: StringFilter<"Definition"> | string
+  }
+
+  export type DictionaryEntryCreateWithoutDefinitionInput = {
+    id?: string
+    word: string
+    language: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type DictionaryEntryUncheckedCreateWithoutDefinitionInput = {
+    id?: string
+    word: string
+    language: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type DictionaryEntryCreateOrConnectWithoutDefinitionInput = {
+    where: DictionaryEntryWhereUniqueInput
+    create: XOR<DictionaryEntryCreateWithoutDefinitionInput, DictionaryEntryUncheckedCreateWithoutDefinitionInput>
+  }
+
+  export type DictionaryEntryUpsertWithoutDefinitionInput = {
+    update: XOR<DictionaryEntryUpdateWithoutDefinitionInput, DictionaryEntryUncheckedUpdateWithoutDefinitionInput>
+    create: XOR<DictionaryEntryCreateWithoutDefinitionInput, DictionaryEntryUncheckedCreateWithoutDefinitionInput>
+    where?: DictionaryEntryWhereInput
+  }
+
+  export type DictionaryEntryUpdateToOneWithWhereWithoutDefinitionInput = {
+    where?: DictionaryEntryWhereInput
+    data: XOR<DictionaryEntryUpdateWithoutDefinitionInput, DictionaryEntryUncheckedUpdateWithoutDefinitionInput>
+  }
+
+  export type DictionaryEntryUpdateWithoutDefinitionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    word?: StringFieldUpdateOperationsInput | string
+    language?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DictionaryEntryUncheckedUpdateWithoutDefinitionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    word?: StringFieldUpdateOperationsInput | string
+    language?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DefinitionCreateManyDictionaryEntryInput = {
+    id?: string
+    meaning: string
+    partOfSpeech: string
+    examples?: DefinitionCreateexamplesInput | string[]
+  }
+
+  export type DefinitionUpdateWithoutDictionaryEntryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    meaning?: StringFieldUpdateOperationsInput | string
+    partOfSpeech?: StringFieldUpdateOperationsInput | string
+    examples?: DefinitionUpdateexamplesInput | string[]
+  }
+
+  export type DefinitionUncheckedUpdateWithoutDictionaryEntryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    meaning?: StringFieldUpdateOperationsInput | string
+    partOfSpeech?: StringFieldUpdateOperationsInput | string
+    examples?: DefinitionUpdateexamplesInput | string[]
+  }
+
+  export type DefinitionUncheckedUpdateManyWithoutDictionaryEntryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    meaning?: StringFieldUpdateOperationsInput | string
+    partOfSpeech?: StringFieldUpdateOperationsInput | string
+    examples?: DefinitionUpdateexamplesInput | string[]
   }
 
 

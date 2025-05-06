@@ -18,15 +18,11 @@ export async function POST(request: Request) {
       if (existingEntry) {
          return NextResponse.json({
             word: existingEntry.word,
-            definitions: [
-               {
-                  partOfSpeech: existingEntry.partOfSpeech || "unknown",
-                  meaning: existingEntry.definition,
-                  examples: existingEntry.examples
-                     ? existingEntry.examples.split("\n")
-                     : [],
-               },
-            ],
+            definitions: existingEntry.definition.map((def) => ({
+               partOfSpeech: def.partOfSpeech || "unknown",
+               meaning: def.meaning,
+               examples: def.examples ? def.examples : [],
+            })),
             language: existingEntry.language,
          });
       }
@@ -34,15 +30,19 @@ export async function POST(request: Request) {
       const definition = await getDictionaryDefinition(word, language);
 
       if (definition && definition.definitions.length > 0) {
-         const firstDef = definition.definitions[0];
-         await saveDictionaryEntry(
-            word,
-            firstDef.meaning,
-            language,
-            firstDef.partOfSpeech,
-            firstDef.examples ? firstDef.examples.join("\n") : undefined
-         );
+         await saveDictionaryEntry(word, definition.definitions, language);
       }
+
+      // if (definition && definition.definitions.length > 0) {
+      //    const firstDef = definition.definitions[0];
+      //    await saveDictionaryEntry(
+      //       word,
+      //       firstDef.meaning,
+      //       language,
+      //       firstDef.partOfSpeech,
+      //       firstDef.examples ? firstDef.examples.join("\n") : undefined
+      //    );
+      // }
 
       return NextResponse.json(definition);
    } catch (error) {

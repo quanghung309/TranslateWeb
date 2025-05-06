@@ -12,17 +12,24 @@ datasource db {
 }
 
 model DictionaryEntry {
-  id           String   @id @default(cuid())
-  word         String
-  definition   String
-  language     String
-  partOfSpeech String?
-  examples     String?
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  id         String       @id @default(cuid())
+  word       String
+  language   String
+  createdAt  DateTime     @default(now())
+  updatedAt  DateTime     @updatedAt
+  definition Definition[]
 
   @@unique([word, language])
   @@index([word, language])
+}
+
+model Definition {
+  id                String          @id @default(cuid())
+  meaning           String
+  partOfSpeech      String
+  examples          String[]
+  dictionaryEntry   DictionaryEntry @relation(fields: [dictionaryEntryId], references: [id])
+  dictionaryEntryId String
 }
 
 model TranslationHistory {

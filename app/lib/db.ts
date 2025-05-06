@@ -16,29 +16,37 @@ export default prisma;
 
 export async function saveDictionaryEntry(
    word: string,
-   definition: string,
-   language: string,
-   partOfSpeech?: string,
-   examples?: string
+   definitions: {
+      meaning: string;
+      partOfSpeech?: string;
+      examples?: string[];
+   }[],
+   language: string
 ) {
    return prisma.dictionaryEntry.upsert({
       where: {
-         word_language: {
-            word,
-            language,
-         },
+         word_language: { word, language },
       },
       update: {
-         definition,
-         partOfSpeech,
-         examples,
+         definition: {
+            deleteMany: {},
+            create: definitions.map((def) => ({
+               meaning: def.meaning,
+               partOfSpeech: def.partOfSpeech ?? "unknown",
+               examples: def.examples ?? [],
+            })),
+         },
       },
       create: {
          word,
-         definition,
          language,
-         partOfSpeech,
-         examples,
+         definition: {
+            create: definitions.map((def) => ({
+               meaning: def.meaning,
+               partOfSpeech: def.partOfSpeech ?? "unknown",
+               examples: def.examples ?? [],
+            })),
+         },
       },
    });
 }
@@ -46,10 +54,10 @@ export async function saveDictionaryEntry(
 export async function findDictionaryEntry(word: string, language: string) {
    return prisma.dictionaryEntry.findUnique({
       where: {
-         word_language: {
-            word,
-            language,
-         },
+         word_language: { word, language },
+      },
+      include: {
+         definition: true,
       },
    });
 }

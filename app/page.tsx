@@ -1,5 +1,6 @@
 import TranslateComponent from "./components/TranslateComponent";
 import DictionaryComponent from "./components/DictionaryComponent";
+import PdfTranslator from "./components/pdf/PdfTranslator";
 
 export default function Home() {
    return (
@@ -22,6 +23,10 @@ export default function Home() {
             <section className="p-6 rounded-lg bg-white dark:bg-gray-800 border border-slate-200 dark:border-slate-700 shadow-md">
                <h2 className="text-2xl mb-4 font-semibold">Dictionary</h2>
                <DictionaryComponent />
+            </section>
+
+            <section className="p-6 rounded-lg bg-white dark:bg-gray-800 border border-slate-200 dark:border-slate-700 shadow-md">
+               <PdfTranslator />
             </section>
          </main>
 
