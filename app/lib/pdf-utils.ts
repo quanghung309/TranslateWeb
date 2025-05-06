@@ -143,17 +143,6 @@ export const storeDocumentInPinecone = async (
       const listIndexesResponse = await pinecone.listIndexes();
       console.log("Index list response:", JSON.stringify(listIndexesResponse));
 
-      // let indexExists = false;
-      // if (Array.isArray(listIndexesResponse)) {
-      //    indexExists = listIndexesResponse.includes(indexName);
-      // } else if (
-      //    listIndexesResponse &&
-      //    typeof listIndexesResponse === "object"
-      // ) {
-      //    const indexNames = Object.keys(listIndexesResponse);
-      //    indexExists = indexNames.includes(indexName);
-      // }
-
       let index;
       try {
          index = pinecone.index(indexName);
@@ -166,7 +155,7 @@ export const storeDocumentInPinecone = async (
             await pinecone.createIndex({
                name: indexName,
                dimension: 768,
-               metric: "cosine",
+               metric: "dotproduct",
                spec: {
                   serverless: {
                      cloud: "aws",
