@@ -67,12 +67,12 @@ export default function TranslateComponent() {
    };
 
    return (
-      <div className="translate-container">
-         <div className="language-select-container">
+      <div className="flex flex-col gap-4">
+         <div className="flex items-center gap-4">
             <select
                value={sourceLanguage}
                onChange={(e) => setSourceLanguage(e.target.value)}
-               className="language-select"
+               className="flex-1 p-2 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-gray-800 text-base focus:outline-none focus:ring-2 focus:ring-indigo-500"
             >
                {LANGUAGES.map((lang) => (
                   <option key={`source-${lang.code}`} value={lang.code}>
@@ -83,7 +83,7 @@ export default function TranslateComponent() {
 
             <button
                onClick={handleSwapLanguages}
-               className="swap-button"
+               className="p-2 bg-gray-200 dark:bg-gray-700 rounded-lg border-none cursor-pointer text-xl transition-colors hover:bg-gray-300 dark:hover:bg-gray-600"
                aria-label="Swap languages"
             >
                ⇄
@@ -92,7 +92,7 @@ export default function TranslateComponent() {
             <select
                value={targetLanguage}
                onChange={(e) => setTargetLanguage(e.target.value)}
-               className="language-select"
+               className="flex-1 p-2 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-gray-800 text-base focus:outline-none focus:ring-2 focus:ring-indigo-500"
             >
                {LANGUAGES.map((lang) => (
                   <option key={`target-${lang.code}`} value={lang.code}>
@@ -102,30 +102,34 @@ export default function TranslateComponent() {
             </select>
          </div>
 
-         <div className="text-areas">
+         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <textarea
                value={sourceText}
                onChange={(e) => setSourceText(e.target.value)}
                placeholder="Enter text to translate"
-               className="text-input"
+               className="p-4 rounded-lg border border-slate-200 dark:border-slate-700 text-base min-h-[150px] focus:outline-none focus:ring-2 focus:ring-indigo-500"
                rows={5}
             />
 
-            <div className="text-output">
+            <div className="p-4 rounded-lg border border-slate-200 dark:border-slate-700 bg-gray-100 dark:bg-gray-700 min-h-[150px] flex items-center justify-center">
                {isLoading ? (
-                  <div className="loading">Translating...</div>
+                  <div className="flex items-center justify-center min-h-[100px] text-gray-500 dark:text-gray-400 opacity-70">
+                     Translating...
+                  </div>
                ) : (
-                  <div className="translated-text">{translatedText}</div>
+                  <div className="w-full h-full whitespace-pre-wrap break-words">
+                     {translatedText}
+                  </div>
                )}
             </div>
          </div>
 
-         {error && <div className="error-message">{error}</div>}
+         {error && <div className="text-red-500 py-2">{error}</div>}
 
          <button
             onClick={handleTranslate}
             disabled={isLoading || !sourceText.trim()}
-            className="translate-button"
+            className="py-3 px-6 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-base cursor-pointer transition-colors disabled:opacity-50 disabled:cursor-not-allowed mt-2"
          >
             {isLoading ? "Translating..." : "Translate"}
          </button>

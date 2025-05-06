@@ -47,22 +47,20 @@ export default function DictionaryComponent() {
    };
 
    return (
-      <div className="dictionary-container">
-         <h2>Dictionary Lookup</h2>
-
-         <div className="dictionary-form">
+      <div className="flex flex-col gap-6">
+         <div className="flex flex-col md:flex-row gap-4">
             <input
                type="text"
                value={word}
                onChange={(e) => setWord(e.target.value)}
                placeholder="Enter a word"
-               className="word-input"
+               className="flex-grow p-3 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-gray-800 text-base focus:outline-none focus:ring-2 focus:ring-indigo-500"
             />
 
             <select
                value={language}
                onChange={(e) => setLanguage(e.target.value)}
-               className="language-select"
+               className="p-3 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-gray-800 text-base focus:outline-none focus:ring-2 focus:ring-indigo-500"
             >
                <option value="en">English</option>
                <option value="es">Spanish</option>
@@ -71,34 +69,47 @@ export default function DictionaryComponent() {
                <option value="it">Italian</option>
                <option value="ja">Japanese</option>
                <option value="zh">Chinese</option>
+               <option value="vn">Vietnamese</option>
             </select>
 
             <button
                onClick={handleLookup}
                disabled={isLoading || !word.trim()}
-               className="lookup-button"
+               className="py-3 px-6 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-base cursor-pointer transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
                {isLoading ? "Looking up..." : "Look up"}
             </button>
          </div>
 
-         {error && <div className="error-message">{error}</div>}
+         {error && <div className="text-red-500 py-2">{error}</div>}
 
-         {isLoading && <div className="loading">Looking up word...</div>}
+         {isLoading && (
+            <div className="flex items-center justify-center min-h-[100px] text-gray-500 dark:text-gray-400 opacity-70">
+               Looking up word...
+            </div>
+         )}
 
          {result && (
-            <div className="definition-result">
-               <h3>{result.word}</h3>
+            <div className="p-6 rounded-lg border border-slate-200 dark:border-slate-700 bg-gray-100 dark:bg-gray-700">
+               <h3 className="text-2xl mb-4 pb-2 border-b border-slate-200 dark:border-slate-600">
+                  {result.word}
+               </h3>
+
                {result.definitions.map((def, index) => (
-                  <div key={index} className="definition-item">
-                     <p className="part-of-speech">{def.partOfSpeech}</p>
-                     <p className="meaning">{def.meaning}</p>
+                  <div key={index} className="mb-6">
+                     <p className="italic mb-2 text-indigo-600 dark:text-indigo-400">
+                        {def.partOfSpeech}
+                     </p>
+                     <p className="mb-4 text-lg">{def.meaning}</p>
+
                      {def.examples && def.examples.length > 0 && (
-                        <div className="examples">
-                           <p className="examples-title">Examples:</p>
-                           <ul>
+                        <div className="mt-2">
+                           <p className="font-bold mb-2">Examples:</p>
+                           <ul className="list-disc pl-6">
                               {def.examples.map((example, i) => (
-                                 <li key={i}>{example}</li>
+                                 <li key={i} className="mb-1">
+                                    {example}
+                                 </li>
                               ))}
                            </ul>
                         </div>

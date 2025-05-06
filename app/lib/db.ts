@@ -9,13 +9,11 @@ declare global {
    var prisma: undefined | ReturnType<typeof prismaClientSingleton>;
 }
 
-// Use a global variable to avoid multiple instances during development
 const prisma = global.prisma ?? prismaClientSingleton();
 if (process.env.NODE_ENV !== "production") global.prisma = prisma;
 
 export default prisma;
 
-// Dictionary-related functions
 export async function saveDictionaryEntry(
    word: string,
    definition: string,
@@ -56,7 +54,6 @@ export async function findDictionaryEntry(word: string, language: string) {
    });
 }
 
-// Translation history functions
 export async function saveTranslationHistory(
    originalText: string,
    translatedText: string,
