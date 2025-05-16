@@ -166,7 +166,6 @@ export default function PdfTranslator() {
                   )}
                </div>
 
-               {/* Right panel: Translation results */}
                <div className="md:col-span-2">
                   <div className="p-6 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 h-full">
                      {selectedTitle ? (

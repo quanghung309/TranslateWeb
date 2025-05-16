@@ -33,17 +33,6 @@ export async function POST(request: Request) {
          await saveDictionaryEntry(word, definition.definitions, language);
       }
 
-      // if (definition && definition.definitions.length > 0) {
-      //    const firstDef = definition.definitions[0];
-      //    await saveDictionaryEntry(
-      //       word,
-      //       firstDef.meaning,
-      //       language,
-      //       firstDef.partOfSpeech,
-      //       firstDef.examples ? firstDef.examples.join("\n") : undefined
-      //    );
-      // }
-
       return NextResponse.json(definition);
    } catch (error) {
       console.error("Dictionary API error:", error);
